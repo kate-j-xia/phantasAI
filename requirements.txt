@@ -7,3 +7,5 @@ scipy
 safetensors
 accelerate
 
+fastapi 
+uvicorn
