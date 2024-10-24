@@ -82,8 +82,9 @@ if __name__=="__main__":
     # prompt = "an asian girl with big eyes and long hair in a dark, drapery, flowery dress"
     # prompt = "portrait photo of a old warrior chief"
     # prompt = "tintype photography of a melancholic gothic fairy-like female and flower, dark background"
-    prompt = "a precise, black and white pencil sketch of a beautiful french 2-story farmhouse, " + \
-        "with a small pathway leading to the front door"
+    # prompt = "a precise, black and white pencil sketch of a beautiful french 2-story farmhouse, " + \
+    #     "with a small pathway leading to the front door"
+    prompt = "black and white pencil sketch of a large modern french kitchen with a big island, whitish cabinets."
 
     input_image = "vv-frontyard conv.jpeg"
     

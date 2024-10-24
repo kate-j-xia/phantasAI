@@ -1,1 +1,30 @@
 *.png
+*.old
+.DS_Store
+.log
+*.wav
+*.pyc
+__pycache__/
+*.db
+
+models/
+voices/
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+.env
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+
+package-lock.json
+
+
+

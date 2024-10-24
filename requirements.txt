@@ -8,6 +8,15 @@ scipy
 safetensors
 accelerate
 pillow
+tokenizers
+sentencepiece
 
+# sounddevice
+vosk
+soundfile
+pydub
+
+sys
 fastapi 
 uvicorn
+sqlalchemy
