@@ -1,0 +1,20 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch 
+torchvision
+torchaudio
+diffusers
+transformers
+scipy
+safetensors
+accelerate
+pillow
+tokenizers
+sentencepiece
+
+
+vosk
+
+sys
+fastapi 
+uvicorn
+sqlalchemy
