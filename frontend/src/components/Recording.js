@@ -147,7 +147,7 @@ const SpeechToText = () => {
           onTouchEnd={stopRecording}
           className="record-button"
         >
-          Hold to Record
+          Hold to Speak
         </button>
       </div>
       <ReactMic

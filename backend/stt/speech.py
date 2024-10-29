@@ -56,30 +56,39 @@ async def from_file(audio_path: str):
                 err = "Audio file must have a sample rate of 16kHz"
                 return {"status": 400, "err": err} 
 
-            print(f"File has {wf.getnchannels()} channels, "
-                    f"{wf.getsampwidth()} bytes per sample, "
-                    f"and {wf.getframerate()} frame rate")
+            print(f"from_file(): the input audio has {wf.getnchannels()} channels, "
+                f"{wf.getsampwidth()} bytes per sample, and {wf.getframerate()} frame rate")
              # Initialize the recognizer
             recognizer = vosk.KaldiRecognizer(model, wf.getframerate())
 
             # Process the audio and perform speech-to-text
-            transcription = ""
+            transcripts = []
             while True:
                 data = wf.readframes(4000)
                 if len(data) == 0:
                     break
                 if recognizer.AcceptWaveform(data):
                     result = recognizer.Result()
-                    transcription += result
-
+                    # print(f'from_file(): result so far = {result}')
+                    transcripts.append(result.strip())            
+            # print(f'from_file(): transcripts so far = {transcripts}')
+            prompt = ""
+            for s in transcripts:                              
+                transcript = json.loads(s)
+                # print(f'from_file(): script = {transcript}')
+                prompt += transcript['text'] + ". "
             # Get the final partial transcription (if any)
-            transcription += recognizer.FinalResult()
-            print(f'from_file(): transcription = {transcription}')
-            prompt = json.loads(transcription)
+            print(f'from_file(): transcription before finals = {prompt}')
+            transcript = json.loads(recognizer.FinalResult())
+            print(f'from_file(): finalResult = {transcript}')
+            # transcription += recognizer.FinalResult()
+            prompt += transcript['text']
+            
+            # prompt = json.loads(transcription)
             print(f'from_file(): prompt = {prompt}')
 
         # Return the transcription as JSON
-        return {"status": 200, "prompt": prompt["text"]}
+        return {"status": 200, "prompt": prompt}
 
     except wave.Error as we:
         print(f'from_file(): wave file error - {we}') 

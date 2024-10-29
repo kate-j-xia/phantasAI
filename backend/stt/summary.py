@@ -2,7 +2,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 async def summarize(input_text: str) -> str:
     # Load the pre-trained Flan-T5 model and tokenizer
-    model_name = "google/flan-t5-base"  # or try "flan-t5-base" for a larger model
+    model_name = "google/flan-t5-large"  # or try "flan-t5-base" for a larger model
     print(f'Model: {model_name}')
     tokenizer = T5Tokenizer.from_pretrained(model_name)
     model = T5ForConditionalGeneration.from_pretrained(model_name)
@@ -30,11 +30,11 @@ async def summarize(input_text: str) -> str:
 
     # Tokenize the input and generate output
     inputs = tokenizer(input_text, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=150, num_beams=5, early_stopping=True)
+    outputs = model.generate(inputs.input_ids, max_length=300, num_beams=5, early_stopping=True)
 
     # Decode and print the output
     clean_summary = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print("Cleaned up and summarized text:", clean_summary)
+    print("\nCleaned up and summarized text:  =======", clean_summary)
     return clean_summary
 
 
