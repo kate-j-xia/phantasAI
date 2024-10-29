@@ -1,6 +1,6 @@
-import sounddevice as sd
-import soundfile as sf
-from pydub import AudioSegment
+# import sounddevice as sd
+# import soundfile as sf
+# from pydub import AudioSegment
 import queue
 import vosk
 import sys
@@ -12,7 +12,7 @@ import sys
 import os
 import time
 from fastapi import WebSocket
-import tempfile
+# import tempfile
 
 data_to_write = ["Line 1", "Line 2", "Line 3"]
 
