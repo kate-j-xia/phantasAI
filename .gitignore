@@ -27,7 +27,7 @@ node_modules/
 # misc
 
 package-lock.json
-katex8-sc.json
+katex8-*-sc.json
 
 
 
