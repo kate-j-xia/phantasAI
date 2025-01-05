@@ -77,7 +77,7 @@ const SpeechToText = () => {
         mimeType="audio/wav"
       />
       <div>
-        <h3>Transcript:</h3>
+        <h3>Transcription:</h3>
         <pre>{transcript}</pre>
       </div>
     </div>

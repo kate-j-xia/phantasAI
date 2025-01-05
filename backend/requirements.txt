@@ -18,3 +18,5 @@ sys
 fastapi 
 uvicorn
 sqlalchemy
+
+google-cloud-vertexai

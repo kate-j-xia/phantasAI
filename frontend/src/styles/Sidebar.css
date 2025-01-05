@@ -1,60 +1,113 @@
+/* Sidebar Styles */
 .sidebar {
-  width: 250px;
-  background-color: #333;
-  color: white;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+    width: 218px;
+    height: 100vh;
+    
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
 
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed {
+    width: 60px; /* Collapsed width */
+    align-items: center;    
+  }
+  
+  /* Sidebar Header */
+  .sidebar-header {
+    margin-top: 60px; 
+    width: 100%;
+    padding: 12px 18px;
+  }
 
-.sidebar-header h2 {
-  margin: 0;
-}
+  .sidebar-header img {
+    vertical-align: middle;
+    
+    width: 28px;
+    height: 28px;
+    margin-right: 10px; /* Space between the icon and text */
+  }
+  
+  .sidebar-header span {
+    vertical-align: middle;
+    
+    font-size: 21px;
+    font-weight: bold;
+    color: #383737;
+  }
 
-.menu {
-  margin-top: 20px;
-}
+  /* Sidebar Menu */
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .menu li {
+    width: 100%;
+  }
+  
+  .menu li a {
+    display: block;
+    padding: 12px 18px;
+    color: #242323;
+    text-decoration: none;
+    font-size: 12px;
+  }
+  
+  .menu li a:hover {
+    background: #e0e0e0;
+  }
+  
+  .menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; /* Space between the icon and text */
+    vertical-align: middle;
+  }
+  
+  .sidebar.collapsed .menu {
+    margin-top: 120px; 
+  }
 
-.menu ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.menu li {
-  margin: 15px 0;
-}
-
-.menu li a {
-  color: white;
-  text-decoration: none;
-}
-
-.menu li a:hover {
-  text-decoration: underline;
-}
-
-.menu.expanded ul {
-  display: block;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
+  .sidebar.collapsed .menu-icon {
+    margin-right: 0; /* Remove space when collapsed */
+  }
+  
+  .sidebar.collapsed .menu li a span {
+    display: none; /* Hide the menu text when collapsed */
+  }
+  
+  .hamburger-button {
+    /* all: unset; /* Resets all browser styles */
+    position: absolute;
+    top: 15px;
+    left: 12px; /* Keep button in top left */
+    background: none;
+    border: 0; 
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Ensures the button is a circle */
+    height: 50px; /* Ensures the button is a circle */
+    border-radius: 50%;
+    transition: background 0.5s ease;  
+  }
+  
+  .hamburger-button:hover {
+    background: #eaeaea; /* Hover effect */
+  }
+  
+  .hamburger-button img {
+    width: 20px;
+    height: 20px;
+  }
+  

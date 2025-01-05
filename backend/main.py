@@ -1,26 +1,30 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Depends
+from fastapi import FastAPI, File, UploadFile, BackgroundTasks, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import soundfile as sf
+import time
+
+# import soundfile as sf
 import shutil
 
 import uvicorn
 from typing import Annotated, List
 from sqlalchemy.orm import Session
+from pydantic import BaseModel
 
 from core.manager import get_db, UserBase, UserResp, UserListResp, \
     ArtBase, ArtResp, create_art, create_user, get_arts_by_user, get_users
 from core.schema import User, Art
 
-from sd.gen import gen_image
-from stt.speech import from_file, from_stream
-from stt.summary import summarize
+import sd.gen as sd
+import stt.speech as stt
+import gemini.vertex as vertex
 
 app = FastAPI()
 
 # React app url
 origins = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://a3b2-104-10-252-128.ngrok-free.app"
 ]
 
 app.add_middleware(
@@ -110,7 +114,7 @@ def delete_art(user_name: str, art_id: int, db: Session = Depends(get_db)):
 
 async def transcript_audio(file: UploadFile = File(...)):
     # Read the uploaded audio file
-    audio_data, samplerate = sf.read(file.file)
+    # audio_data, samplerate = sf.read(file.file)
 
     # Initialize the Vosk recognizer with the correct sample rate
     # recognizer = vosk.KaldiRecognizer(model, samplerate)
@@ -122,9 +126,10 @@ async def transcript_audio(file: UploadFile = File(...)):
     # result = json.loads(recognizer.FinalResult())
 
     # return {"transcript": result.get("text", "")}
+    print(f'transcript_audio(): starting...')
 
-@app.post("/visualize/")
-async def visualize(file: UploadFile = File(...)):
+@app.post("/transcribe/")
+async def transcribe(file: UploadFile = File(...)):
     db_dependency = Annotated[Session, Depends(get_db)]
     use_image = False
 
@@ -141,13 +146,13 @@ async def visualize(file: UploadFile = File(...)):
         #    raise HTTPException(status_code=400, detail="Invalid file type")
 
         # prompt = from_stream()
-        results = await from_file(file.filename)
+        results = await stt.from_file(file.filename)
         print(f'visualize(): result = {results}\n')
         if results["status"] == 400:
             return JSONResponse(content={"message": results["err"]}, status_code=400)
 
-        summary = await summarize(results["prompt"])
-
+        # summary = await stt.summarize(results["prompt"])
+        summary = "Summary later..."
         print(f'visualize(): {summary}\n')
 
         # image_file = gen_image(use_image, prompt)
@@ -160,6 +165,42 @@ async def visualize(file: UploadFile = File(...)):
             print(f"visualize(): Error processing request: {e}")
             raise HTTPException(status_code=400, detail=str(e))
 
+class InputData(BaseModel):
+    prompt: str
+    input2: str
+
+@app.post("/visualize")
+# async def visualize(user_id: str, prompt: str, background_tasks: BackgroundTasks):
+async def visualize(input: InputData):
+    # task_status[user_id] = "in progress"
+    # create an art entry for the user in db
+    result = {"message": f"Received input1: {input.prompt} and input2: {input.input2}"}
+    
+    start = time.time()
+    user_id = "test_user_688"
+    prompt = """
+        pencil sketch for a 2-story prairie style house with a bay window on one side and 
+        a front porch, a solid wood front door, and a small garage on the other side
+        """
+    # print(f'main.visualize(): prompt = \n{prompt}\n')
+    # time.sleep(3)
+    await vertex.visualize(user_id, prompt)
+
+    lapse = time.time() - start       
+    print(f'visualize(): takes {lapse} sec')          
+    # background_tasks.add_task(vertex.generate_image_from_text, user_id, prompt)
+    return JSONResponse(content={"message": "Your task has started! We’ll notify you when it’s complete."})
+                    
+
+@app.get("/task-status/{user_id}")
+async def get_task_status(user_id: str):
+    # status = task_status.get(user_id)
+    status = 'Incomplete'
+    if not status:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return {"status": status}
+
+
 @app.get("/generate/")
 async def generate_image(prompt: str):
     use_image = True
@@ -168,7 +209,7 @@ async def generate_image(prompt: str):
     output_file = "vv-frontyard-new"
     print(f'generate_image(): {prompt}\n')
 
-    output = gen_image(use_image, prompt, input_image, output_file)
+    output = vertex.gen_image(use_image, prompt, input_image, output_file)
     return {"message": "Image generated", "path": output}
 
 
@@ -178,7 +219,7 @@ async def transcript_speech(prompt: str):
 
     print(f'transcript_speech(): {prompt}\n')
 
-    output = from_stream()
+    output = vertex.from_stream()
     return {"message": "Transcribing from speech", "transcripts": output}
 
 
@@ -190,10 +231,14 @@ async def summarize_text(prompt: str):
     output_file = "vv-frontyard-new"
     print(f'generate_image(): {prompt}\n')
 
-    output = summarize()
+    output = vertex.summarize()
     return {"message": "Image generated", "path": output}
 
 
 
 if __name__ == '__main__':
-    uvicorn.run("main:app", host="0.0.0.0", port=6188)
+    uvicorn.run("main:app", 
+                host="localhost", 
+                port=6188,
+                ssl_keyfile="localhost-key.pem",
+                ssl_certfile="localhost.pem")
