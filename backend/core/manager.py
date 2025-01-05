@@ -51,8 +51,8 @@ def create_user(db_session, name: str):
     db_session.refresh(user)
     return user
 
-def create_art(db_session, user_id: int, prompt: str, summary: str, image: str):
-    art = models.Art(user_id=user_id, prompt=prompt, summary=summary, image=image)
+def create_art(db_session, user_id: int, prompt: str, summary: str, image: str, status: str):
+    art = models.Art(user_id=user_id, prompt=prompt, summary=summary, image=image, status=status)
     db_session.add(art)
     db_session.commit()
     db_session.refresh(art)

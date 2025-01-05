@@ -1,0 +1,72 @@
+
+
+.voice-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+  
+/* Speak Button */
+.speak-button {
+    background-color: #dadbda;
+    color: #fff;
+    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    padding: 8px 8px;
+    margin-right: 28px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.speak-button image {
+    width: 12px;
+    height: 12px;
+}
+
+.speak-button:active {
+  background-color: #8a8c8e;
+}
+
+.speak-button:focus {
+  outline: none;
+}
+
+.text-area {
+    flex: 1;
+    width: 90%;
+    height: 180px;
+    margin: 15px 0;
+    padding: 10px;
+    font-size: 15px;
+    border: 0px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.text-area.summary {
+  height: 120px;
+  background-color: #f6f3f3;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.status-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.status-text {
+  font-size: 1rem;
+  color: #888;
+}
+

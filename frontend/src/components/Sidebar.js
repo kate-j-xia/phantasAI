@@ -1,30 +1,56 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+
+import hamburgerIcon from "../assets/icons8-hamburger-menu.svg";
+import snailLogo from "../assets/snail-logo.png"
+
+import paletteIcon from "../assets/artist-palette.png"
+import trascribeIcon from "../assets/live-transcribe.svg"
+import imageIcon from "../assets/icons8-image-48.png"
+
 import '../styles/Sidebar.css';
 
 function Sidebar() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const toggleMenu = () => {
-    setIsExpanded(!isExpanded);
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
   };
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-header">
-        <h2>Menu</h2>
-        <button onClick={toggleMenu}>
-          {isExpanded ? 'Collapse' : 'Expand'}
+    <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+        <button className="hamburger-button" onClick={toggleSidebar}>
+          <img
+            src={hamburgerIcon} alt="Toggle Sidebar"
+          />
         </button>
-      </div>
-      <nav className={`menu ${isExpanded ? 'expanded' : ''}`}>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/prompts">Prompts</Link></li>
-          <li><Link to="/images">Images</Link></li>
-          
-        </ul>
-      </nav>
+        {!isCollapsed && (
+            <div className="sidebar-header">
+                <img src={snailLogo} alt="Aph-artist Logo"/>
+                <span>Aph-artist.ai</span>
+            </div>)
+        }
+        <ul className="menu">
+            <li>
+                <a href="/">
+                    <img src={paletteIcon} alt="Visualization" className="menu-icon" />
+                    {!isCollapsed && <span>Visualization</span>}
+                </a>
+            </li>
+            <li>
+                <a href="/transcripts">
+                    <img src={trascribeIcon} alt="Transcribe" className="menu-icon" />
+                    {!isCollapsed && <span>Transcription</span>}
+                </a>
+            </li>
+            <li>
+                <a href="/images">
+                    <img src={imageIcon} alt="Images" className="menu-icon" />
+                    {!isCollapsed && <span>Images</span>}
+                </a>
+            </li>
+        </ul>    
     </div>
   );
 }

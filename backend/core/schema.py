@@ -21,6 +21,7 @@ class Art(Base):
     summary = Column(Text)
     image = Column(String)  # Path or URL to the image
     like = Column(Boolean)
+    status = Column(Text) # In Progress, Done, Invalid, Deleted
     timestamp = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # Relationship to Users

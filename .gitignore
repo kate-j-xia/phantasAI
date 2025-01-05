@@ -6,6 +6,8 @@
 *.pyc
 __pycache__/
 *.db
+*.jpg
+*.jpeg
 
 models/
 voices/
@@ -25,6 +27,7 @@ node_modules/
 # misc
 
 package-lock.json
+katex8-sc.json
 
 
 

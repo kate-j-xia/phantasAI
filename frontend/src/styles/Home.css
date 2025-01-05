@@ -1,0 +1,63 @@
+
+textarea:focus {
+    outline: none;
+}
+
+.input-textarea {
+    border: 0.2px solid gray; /* Thin light purple border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 12px; /* Inner spacing for a better user experience */
+    flex: 1; /* Allow the textarea to take all available space */
+    font-size: 12px; /* Adjust the font size for readability */
+    line-height: 1.5; /* Space between lines of text */
+    width: 100%; /* Full width (adjust as needed) */
+    height: 180px; /* Approximate height for 5-6 lines */
+    resize: vertical; /* Allow vertical resizing but not horizontal */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect */
+.input-textarea:hover {
+    border-color: plum; /* Change border color to lavender on hover */
+    box-shadow: 0 0 5px rgba(230, 230, 250, 0.5); /* Optional: Add a subtle shadow */
+}
+
+.button-gradient {
+    background: linear-gradient(to right, rgb(128, 153, 218), purple); /* light blue to purple */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px 30px;
+    font-size: 10px;
+    cursor: pointer;
+    margin-left: 12px; /* Space between textarea and button */
+    align-self: flex-start; /* Ensures top alignment */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-transform: uppercase; /* Optional: makes the text uppercase */
+    transition: transform 0.2s ease; /* Adds a hover animation */
+}
+
+/* Add a hover effect */
+.button-gradient:hover {
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #007bff;
+    animation: spin 1s ease-in-out infinite;
+    margin-top: 30px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.result {
+    margin-top: 20px;
+}
+

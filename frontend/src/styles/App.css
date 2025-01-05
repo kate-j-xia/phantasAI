@@ -1,28 +1,105 @@
-/* General layout */
-.app-container {
+/* General Reset */
+html, body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    width: 90%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
+    display: flex; /* Maintain flex layout */
+    /* box-sizing: border-box; /* Include padding and border in width/height calculations */
+    /* padding: 0 5%; /* Optional: Add horizontal padding to achieve 90% width */
+}
+
+body > div {
+    flex: 1; /* Allows items to grow equally */
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0 2%;
+    }
+}
+
+.app {
+    flex: 1;
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /*background-color: #f9f9f9; */
+    color: #333;
+
     display: flex;
-    min-height: 100vh;
+    justify-content: flex-start;
+    align-items: flex-start; 
+    /* height: 100vh;*/
   }
   
-  .main-content {
-    flex-grow: 1;
+/* Main Content - applicable to all pages */
+.content {
+    flex: 1;
+    display: flex; 
+    align-content: flex-start;
+    align-items: flex-stretch;
+    width: 90%; /* Flexibly adjusts to the browser's width */
+    /* max-width: 600px; /* Prevents it from becoming too wide on larger screens */
+    /*margin: auto; */
     padding: 20px;
-  }
+    background-color: white;
+    
+    overflow-y: auto;
+    /* border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.parent-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    width: 100%;
+    
+    /* gap: 12px; /* Space between child elements */
+    /* overflow: hidden; /* Hide any content overflowing the parent container */
+} 
   
-  /* Header styles remain unchanged */
-  .header {
-    background-color: #4CAF50;
+.container {
+    flex-grow: 1;
+    display: flex; /* Enables horizontal alignment */
+    align-items: flex-start; /* Top-aligns items */
+    align-content: stretch;
+    width: 100%; /* Ensure the container spans the full width */
+    /* max-width: 800px; /* Optional: Add a maximum width for better control */
+    /* margin: 0 auto; /* Center the container horizontally if needed */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 18px; 
+    margin-top: 18px;
+    padding-top: 8px;
+    color: #4CAF50;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin-bottom: 18px; 
+    margin-top: 18px;
+    padding-top: 8px;
+    color: #232823;
+}
+
+.header {
+    width: 100%;
     color: white;
     padding: 20px;
     text-align: center;
-  }
-  
-  /* Footer styles remain unchanged */
-  .footer {
-    background-color: #333;
+}
+
+
+.footer {
+    width: 100%;
     color: white;
     text-align: center;
     padding: 10px 0;
     margin-top: auto;
-  }
-  
+}
