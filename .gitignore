@@ -25,9 +25,9 @@ node_modules/
 /build
 
 # misc
-
 package-lock.json
-katex8-*-sc.json
+backend/config/katex8-*-sc.json
+
 
 
 
