@@ -21,7 +21,7 @@ GCLOUD_REGION = 'us-west1'
 SUMMARIZATION_MODE_ID = 'gemini-1.5-flash-002'  # 'text-bison@002' 
 IMAGE_GEN_MODEL_ID = 'imagen-3.0-generate-001' 
 SUMMARY_PROMPT = "Provide a summary with all the key points for the following text: "
-GENAI_API_KEY = "AIzaSyB7eZ8eJFg-Imipj1OE8xZGFhonVrB5aP4"
+GENAI_API_KEY = ""
 
 # List all endpoints in the project
 def list_endpoints():
