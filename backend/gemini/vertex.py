@@ -21,7 +21,7 @@ GCLOUD_REGION = 'us-west1'
 SUMMARIZATION_MODE_ID = 'gemini-1.5-flash-002'  # 'text-bison@002' 
 IMAGE_GEN_MODEL_ID = 'imagen-3.0-generate-001' 
 SUMMARY_PROMPT = "Provide a summary with all the key points for the following text: "
-GENAI_API_KEY = ""
+GENAI_API_KEY = "" # get from env var
 
 # List all endpoints in the project
 def list_endpoints():
@@ -116,6 +116,7 @@ async def visualize(user_id: str, prompt: str):
   
     print(f"File found at {vertex_sc_file}")
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = vertex_sc_file
+    # GENAI_API_KEY = os.environ["GENAI_API_KEY"]
 
     vertexai.init(project=GCLOUD_PROJECT_ID, location=GCLOUD_REGION)
     # genai.configure(api_key=GENAI_API_KEY) # the gemini imagen api is still not available
