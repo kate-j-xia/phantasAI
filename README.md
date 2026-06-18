@@ -1,10 +1,6 @@
-# The Aphan Artist App
+# phantasAI
 
-A Generative AI App(Agent) for Artists with Aphantasia
-
-## Introduction
-
-This is a Generative AI App(Agent) for Artists with Aphantasia
+generative ai agent for artists w/ aphantasia
 
 ## Features
 
